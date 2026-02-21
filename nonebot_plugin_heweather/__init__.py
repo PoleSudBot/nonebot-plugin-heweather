@@ -14,11 +14,20 @@ from .weather_data import CityNotFoundError, ConfigError, Weather
 __plugin_meta__ = PluginMetadata(
     name="和风天气",
     description="和风天气图片显示插件",
-    usage="天气地名 / 地名天气",
+    usage="""
+## ⛅ 天气查询
+
+- **天气地名** / **地名天气** - 查询指定地区的天气
+""".strip(),
     type="application",
     homepage="https://github.com/kexue-z/nonebot-plugin-heweather",
     config=Config,
     supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna"),
+    extra={
+        "author": "kexue-z",
+        "version": "unknown",
+        "menu_type": "一些工具",
+    },
 )
 
 
