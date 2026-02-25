@@ -25,6 +25,11 @@ class Config(BaseModel):
     qweather_jwt_kid: str | None = Field(
         default=None, description="JWT Key ID，即控制台中上传公钥后即可获取"
     )
+
+    qweather_font_path: str = Field(
+        default="resources/font/pingfangsc-regular.otf",
+        description="天气插件使用的字体路径",
+    )
     debug: bool | None = Field(default=False)
 
 

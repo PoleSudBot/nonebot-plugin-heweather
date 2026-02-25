@@ -4,28 +4,38 @@
   <meta charset="utf8">
   <link rel="stylesheet" href="css/weather.css">
   <link rel="stylesheet" href="css/qweather-icons.css">
-  <script>
-window.onload = function () {
-    color();
-};
-function color() {
-    var date = new Date();
-    var current_hour = date.getHours();
+  <style>
+    @font-face {
+      font-family: 'PingFang SC';
+      src: url('{{ font_path }}');
+    }
 
-    if (!(current_hour >= 6 && current_hour < 18)) {
+    body {
+      font-family: 'PingFang SC', sans-serif;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      color();
+    };
+    function color() {
+      var date = new Date();
+      var current_hour = date.getHours();
+
+      if (!(current_hour >= 6 && current_hour < 18)) {
         document.body.style.backgroundImage = "linear-gradient(rgb(25 23 58), rgb(25 29 45))";
         document.getElementById("today-weather").style.backgroundImage = "linear-gradient(225deg, #0d3447, #0e0e2c)";
         document.getElementById("air").style.backgroundImage = "linear-gradient(225deg, #191a5b, #090b1e)";
         document.getElementById("hours-weather").style.backgroundImage = "linear-gradient(225deg, #0d294b, #1c1c27)";
         document.getElementById("days-weather").style.backgroundImage = "linear-gradient(225deg, #0f2a4b, #0f0f14)";
         air = document.getElementsByName("warning-box");
-        for (var i = 0; i <air.length; i++) {
+        for (var i = 0; i < air.length; i++) {
           air[i].style.backgroundImage = "linear-gradient(225deg, #55112a, #160511)";
         }
         document.body.style.color = "#cecece";
+      }
     }
-}
-</script>
+  </script>
 </head>
 
 <body>
@@ -84,50 +94,53 @@ function color() {
     {% if air %}
     <div class="air" id="air">
       <div class="air-box-top">
-          <span class="air-tag" style="background-color:{{ air['tag_color'] }};">{{ air["aqi"] }} {{ air["category"] }}</span>
+        <span class="air-tag" style="background-color:{{ air['tag_color'] }};">{{ air["aqi"] }} {{ air["category"]
+          }}</span>
       </div>
       <div class="air-box">
-          <div class="air-data">
-              <p>{{ air["pm2p5"] }}</p>
-              <meter value="{{ air['pm2p5'] }}" min="0" max="200"></meter>
-              <p class="des">PM2.5</p>
-          </div>
-          <div class="air-data">
-              <p>{{ air["pm10"] }}</p>
-              <meter value="{{ air['pm10'] }}" min="0" max="200"></meter>
-              <p class="des">PM10</p>
-          </div>
-          <div class="air-data">
-              <p>{{ air["o3"] }}</p>
-              <meter value="{{ air['o3'] }}" min="0" max="200"></meter>
-              <p class="des">O<sub>3</sub></p>
-          </div>
-          <div class="air-data">
-              <p>{{ air["co"] }}</p>
-              <meter value="{{ air['co'] }}" min="0" max="200"></meter>
-              <p class="des">CO</p>
-          </div>
-          <div class="air-data">
-              <p>{{ air["no2"] }}</p>
-              <meter value="{{ air['no2'] }}" min="0" max="200"></meter>
-              <p class="des">NO<sub>2</sub></p>
-          </div>
-          <div class="air-data">
-              <p>{{ air["so2"] }}</p>
-              <meter value="{{ air['so2'] }}" min="0" max="200"></meter>
-              <p class="des">SO<sub>2</sub></p>
-          </div>
+        <div class="air-data">
+          <p>{{ air["pm2p5"] }}</p>
+          <meter value="{{ air['pm2p5'] }}" min="0" max="200"></meter>
+          <p class="des">PM2.5</p>
+        </div>
+        <div class="air-data">
+          <p>{{ air["pm10"] }}</p>
+          <meter value="{{ air['pm10'] }}" min="0" max="200"></meter>
+          <p class="des">PM10</p>
+        </div>
+        <div class="air-data">
+          <p>{{ air["o3"] }}</p>
+          <meter value="{{ air['o3'] }}" min="0" max="200"></meter>
+          <p class="des">O<sub>3</sub></p>
+        </div>
+        <div class="air-data">
+          <p>{{ air["co"] }}</p>
+          <meter value="{{ air['co'] }}" min="0" max="200"></meter>
+          <p class="des">CO</p>
+        </div>
+        <div class="air-data">
+          <p>{{ air["no2"] }}</p>
+          <meter value="{{ air['no2'] }}" min="0" max="200"></meter>
+          <p class="des">NO<sub>2</sub></p>
+        </div>
+        <div class="air-data">
+          <p>{{ air["so2"] }}</p>
+          <meter value="{{ air['so2'] }}" min="0" max="200"></meter>
+          <p class="des">SO<sub>2</sub></p>
+        </div>
       </div>
-  </div>
-  {% endif %}
+    </div>
+    {% endif %}
 
     <div class="hours-weather" id="hours-weather">
       <div class="hour-box">
         {% for hour in hours %}
         <div class="hour-data">
-          <div class="hour-data">      
+          <div class="hour-data">
             <p>{{ hour["temp"] }}°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: {{ hour['temp_percent'] }};"></div></div>
+            <div class="tem-vert-line-box">
+              <div class="tem-vert-line" style="height: {{ hour['temp_percent'] }};"></div>
+            </div>
             <p class="qi-{{ hour['icon'] }} icon-size"></p>
             <p class="hour-des">{{ hour["hour"] }}</p>
           </div>

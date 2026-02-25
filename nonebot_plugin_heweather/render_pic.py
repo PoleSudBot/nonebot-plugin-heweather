@@ -16,6 +16,8 @@ async def render(weather: Weather) -> bytes:
     if weather.air:
         if weather.air.now:
             air = add_tag_color(weather.air.now)
+            
+    font_path = (Path.cwd() / plugin_config.qweather_font_path).as_uri()
 
     return await template_to_pic(
         template_path=template_path,
@@ -27,6 +29,7 @@ async def render(weather: Weather) -> bytes:
             "warning": weather.warning,
             "air": air,
             "hours": add_hour_data(weather.hourly.hourly),
+            "font_path": font_path,
         },
         pages={
             "viewport": {"width": 1000, "height": 300},
